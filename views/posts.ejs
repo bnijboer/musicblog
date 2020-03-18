@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+
+<div class="container">
+      <div class="row justify-content-center">
+            <div class="col-12-lg">
+                  <h1>Blog post overview</h1>
+            </div>
+      </div>
+      <% posts.forEach(function(post){%>
+            <div class="row">
+                  <div class="col-12-lg">
+                        <%= post.content %> - <%= post._id %>
+                  </div>
+            </div>
+      <% }); %>
+</div>
+
+
+<%- include("partials/footer") %>

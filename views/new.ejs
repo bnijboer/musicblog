@@ -1,0 +1,13 @@
+<%- include("partials/header") %>
+
+<h1>new post route</h1> 
+
+<p>
+      Create post
+      <form action="/posts" method="POST">
+            <input type="text" name="post.content" placeholder="Type content here">
+            <button>Post</button>
+      </form>
+</p>
+
+<%- include("partials/footer") %>
