@@ -5,22 +5,30 @@
 
 // DEPENDENCIES
 
-const express     = require("express"),
-      bodyParser  = require("body-parser"),
-      mongoose    = require("mongoose"),
-      app         = express();
+const express           = require("express"),
+      bodyParser        = require("body-parser"),
+      mongoose          = require("mongoose"),
+      methodOverride    = require("method-override"),
+      app               = express();
 
-mongoose.connect("mongodb://localhost/musicblog", {useNewUrlParser: true, useUnifiedTopology: true});
+
+// DB CONNECT
+
+mongoose.connect("mongodb://localhost/musicblog", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+
+
+// APP CONFIG
+
+app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
-app.set("view engine", "ejs");
+app.use(methodOverride("_method"));
 
 
-// DB MODEL
+// MONGOOSE MODEL CONFIG
 
 const postSchema = new mongoose.Schema({
-      content: String,
-      author: String
+      content: String
 });
 
 const Post = mongoose.model("Post", postSchema);
@@ -60,11 +68,17 @@ app.get("/posts/new", function(req, res){
 // CREATE
 // /posts - POST - create new post, then redirect somewhere - Post.create()
 app.post("/posts", function(req, res){
-      Post.create(req.body.content, function(err, newPost){
+
+      var newPost = {
+            content: req.body.content
+      }
+
+      Post.create(newPost, function(err, newPost){
             if(err){
                   console.log(err);
+                  res.render("new");
             } else {
-                  res.redirect("posts");
+                  res.redirect("/posts");
             }
       });
 });
@@ -75,8 +89,9 @@ app.get("/posts/:id", function(req, res){
       Post.findById(req.params.id, function(err, foundPost){
             if(err){
                   console.log(err);
+                  res.redirect("/posts");
             } else {
-                  res.render("show", {posts: foundPost});
+                  res.render("show", {post: foundPost});
             }
       });
 });
@@ -85,7 +100,7 @@ app.get("/posts/:id", function(req, res){
 // EDIT
 // /posts/:id/edit - GET - show edit form for one post - Post.findById()
 app.get("/posts/:id/edit", function(req, res){
-      Post.findById(req.params.id, function(err, foundPost){
+      Post.findOneAndDelete(req.params._id, function(err, foundPost){
             if(err){
                   console.log(err);
             } else {
@@ -107,18 +122,18 @@ app.get("/posts/:id/edit", function(req, res){
 // });
 
 
-// DESTROY
+// DELETE
 // /posts/:id - DELETE - delete a particular post, then redirect somewhere - Post.findByIdAndRemove()
-// app.get("/posts/:id", function(req, res){
-//       Post.findByIdAndRemove(req.params.id, function(err, foundPost){
-//             if(err){
-//                   console.log(err);
-//             } else {
-//                   res.render("posts", {posts: foundPost});
-//             }
-//       });
-// });
-
+app.delete("/posts/:id", function(req, res){
+      Post.findByIdAndRemove(req.params.id, function(err){
+            if(err){
+                  console.log(err);
+                  res.redirect("/posts");
+            } else {
+                  res.redirect("/posts");
+            }
+      });
+});
 
 
 // =================

@@ -2,6 +2,19 @@
 
 <h1>show route</h1>
 
-<p><%= posts.content %></p>
+<div class="container">
+      <div class="row">
+            <div class="col-lg-8">
+                  <%= post.content %>
+            </div>
+            <div class="col-lg-4">
+                  <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                  </form>
+            </div>
+      </div>
+</div>
+
+<a href="/posts">Go back</a>
 
 <%- include("partials/footer") %>

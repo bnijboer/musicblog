@@ -5,9 +5,11 @@
 <p>
       Create post
       <form action="/posts" method="POST">
-            <input type="text" name="post.content" placeholder="Type content here">
+            <input type="text" name="content" placeholder="Type content here">
             <button>Post</button>
       </form>
 </p>
+
+<a href="/posts">Go back</a>
 
 <%- include("partials/footer") %>

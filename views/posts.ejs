@@ -9,7 +9,7 @@
       <% posts.forEach(function(post){%>
             <div class="row">
                   <div class="col-12-lg">
-                        <%= post.content %> - <%= post._id %>
+                        <%= post.content %> - <a href="/posts/<%= post._id %>">Read more</a>
                   </div>
             </div>
       <% }); %>
