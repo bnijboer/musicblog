@@ -1,14 +1,56 @@
 html {
-      height: 100vh;
+      height: 100%;
 }
 
 body {
       height: 100%;
+      background-image: url("../images/background.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position-y: 58%;
+}
+
+#wrapper {
+      background: rgba(256,256,256,0.25);
+      height: 100%;
+      min-height: 100%;
+      
 }
 
 div {
       border: 1px solid black;
+}
+
+footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 0 10px;
       padding-bottom: 10px;
+}
+
+#copyright {
+      color: gray;
+}
+
+#go-back {
+      color: white;
+}
+
+.container {
+      background: whitesmoke;
+      min-width: 400px;
+      width: 50%;
+      border: 1px solid black;
+      padding: 0 50px;
+}
+
+.blog-post {
+      padding: 60px 0;
+      border: 1px solid gray;
+      width: 100%;
 }
 
 .content {

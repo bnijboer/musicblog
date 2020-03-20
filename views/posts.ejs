@@ -12,23 +12,24 @@
             </div>
       </div>
       <% for(var i = posts.length-1; i >= 0; i--){ %>
-            <div class="row">
-                  <div class="col-12-lg">
-                        <h2><%= posts[i].title %></h2>
+            <div class="blog-post">
+                  <div class="row">
+                        <div>
+                              <h2><%= posts[i].title %></h2>
+                        </div>
                   </div>
-            </div>
-            <div class="row">
-                  <div class="col-12-lg">
-                        <%- posts[i].link %>
+                  <div class="row">
+                        <div>
+                              <%- posts[i].link %>
+                        </div>
                   </div>
-            </div>
-            <div class="row">
-                  <div class="col-12-lg">
-                        <%= posts[i].content.substring(0, 100) %>... - <a href="/posts/<%= posts[i]._id %>">Read more</a>
+                  <div class="row">
+                        <div>
+                              <%= posts[i].content.substring(0, 100) %>... - <a href="/posts/<%= posts[i]._id %>">Read more</a>
+                        </div>
                   </div>
             </div>
       <% } %>
 </div>
-
 
 <%- include("partials/footer") %>

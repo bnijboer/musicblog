@@ -5,16 +5,20 @@
 
 // DEPENDENCIES
 
-const express           = require("express"),
-      bodyParser        = require("body-parser"),
-      mongoose          = require("mongoose"),
-      methodOverride    = require("method-override"),
-      app               = express();
+const express                 = require("express"),
+      mongoose                = require("mongoose"),
+      passport                = require("passport"),
+      bodyParser              = require("body-parser"),
+      methodOverride          = require("method-override"),
+      LocalStrategy           = require("passport-local"),
+      User                    = require("./models/user"),
+      passportLocalMongoose   = require("passport-local-mongoose"),
+      app                     = express();
 
 
 // DB CONNECT
 
-mongoose.connect("mongodb://localhost/musicblog", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect("mongodb://localhost:27017/musicblog", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 
 // APP CONFIG
@@ -24,6 +28,19 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
+
+// PASSPORT CONFIGURATION
+
+app.use(require("express-session")({
+      secret: "This is a secret.",
+      resave: false,
+      saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // MONGOOSE MODEL CONFIG
 
@@ -41,6 +58,40 @@ const Post = mongoose.model("Post", postSchema);
 //  ROUTES
 //  ======
 
+// AUTHENTICATION
+
+app.get("/secret", function(req, res){
+      res.send("secret");
+});
+
+
+app.get("/login", function(req, res){
+      res.render("login");
+});
+
+
+app.get("/signup", function(req, res){
+      res.render("signup");
+});
+
+app.post("/signup", function(req, res){
+      req.body.username;
+      req.body.password;
+
+      // creates a new user object and stores it into the db. Password is hashed.
+      User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+            if(err){
+                  console.log(err);
+                  return res.render("signup");
+            }
+
+            //logs user in, stores information and runs serializesession
+            passport.authenticate("local")(req, res, function(){
+
+            });
+      });
+      res.redirect("/posts");
+});
 
 // LANDING
 app.get("/", function(req, res){
