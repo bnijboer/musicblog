@@ -28,6 +28,7 @@ app.use(methodOverride("_method"));
 // MONGOOSE MODEL CONFIG
 
 const postSchema = new mongoose.Schema({
+      title: String,
       content: String
 });
 
@@ -65,11 +66,13 @@ app.get("/posts/new", function(req, res){
       res.render("new");
 });
 
+
 // CREATE
 // /posts - POST - create new post, then redirect somewhere - Post.create()
 app.post("/posts", function(req, res){
 
-      var newPost = {
+      const newPost = {
+            title: req.body.title,
             content: req.body.content
       }
 
@@ -82,6 +85,7 @@ app.post("/posts", function(req, res){
             }
       });
 });
+
 
 // SHOW
 // /posts/:id - GET - show info about one specific post - Post.findById()
@@ -100,26 +104,29 @@ app.get("/posts/:id", function(req, res){
 // EDIT
 // /posts/:id/edit - GET - show edit form for one post - Post.findById()
 app.get("/posts/:id/edit", function(req, res){
-      Post.findOneAndDelete(req.params._id, function(err, foundPost){
+      Post.findById(req.params.id, function(err, foundPost){
             if(err){
                   console.log(err);
+                  res.redirect("/posts");
             } else {
-                  res.render("edit", {posts: foundPost});
+                  res.render("edit", {post: foundPost});
             }
       });
 });
 
+
 // UPDATE
 // /posts/:id - PUT - update a particular post, then redirect somewhere - Post.findByIdAndUpdate()
-// app.get("/posts/:id", function(req, res){
-//       Post.findByIdAndUpdate(req.params.id, function(err, foundPost){
-//             if(err){
-//                   console.log(err);
-//             } else {
-//                   res.render("edit", {posts: foundPost});
-//             }
-//       });
-// });
+app.put("/posts/:id", function(req, res){
+      Post.findByIdAndUpdate(req.params.id, req.body, function(err, updatedPost){
+            if(err){
+                  console.log(err);
+                  res.redirect("/posts");
+            } else {
+                  res.redirect("/posts/" + req.params.id);
+            }
+      });
+});
 
 
 // DELETE
@@ -136,12 +143,13 @@ app.delete("/posts/:id", function(req, res){
 });
 
 
+
 // =================
 // SERVER CONNECTION
 // =================
 
 
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, function(){
       console.log("Served has started on port", port);

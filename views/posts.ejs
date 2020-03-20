@@ -6,13 +6,23 @@
                   <h1>Blog post overview</h1>
             </div>
       </div>
-      <% posts.forEach(function(post){%>
+      <div class="row justify-content-center">
+            <div class="col-12-lg">
+                  <a href="/posts/new" class="btn btn-success">Add post</a>
+            </div>
+      </div>
+      <% for(var i = posts.length-1; i >= 0; i--){ %>
             <div class="row">
                   <div class="col-12-lg">
-                        <%= post.content %> - <a href="/posts/<%= post._id %>">Read more</a>
+                        <h2><%= posts[i].title %></h2>
                   </div>
             </div>
-      <% }); %>
+            <div class="row">
+                  <div class="col-12-lg">
+                        <%= posts[i].content %> - <a href="/posts/<%= posts[i]._id %>">Read more</a>
+                  </div>
+            </div>
+      <% } %>
 </div>
 
 
