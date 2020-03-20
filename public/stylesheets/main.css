@@ -1,25 +1,48 @@
 html {
       height: 100%;
+      margin:  0px auto;
+      padding: 0px auto;
 }
 
 body {
       height: 100%;
+      margin:  0px auto;
+      padding: 0px auto;
+      /* min-height: 100vh; */
       background-image: url("../images/background.jpg");
       background-repeat: no-repeat;
       background-size: cover;
       background-attachment: fixed;
       background-position-y: 58%;
+      
+      /* border: 2px solid green; */
+      /* height: auto; */
 }
 
 #wrapper {
       background: rgba(256,256,256,0.25);
-      height: 100%;
-      min-height: 100%;
+      margin:  0px auto;
+      padding: 0px auto;
+      border-bottom: 1px solid black; /* used to make the wrapper go 100% - I don't know why this happens ¯\_(ツ)_/¯
+      /* height: 100%; */
+      /* height:     auto; */
+      /* min-height: 100% */
+      /* background-size: cover; */
       
 }
 
+.jumbotron {
+      background-image: url("../images/header.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+}
+
 div {
-      border: 1px solid black;
+      /* border: 1px solid black; */
+}
+
+hr {
+      width: 85%;
 }
 
 footer {
@@ -32,6 +55,7 @@ footer {
 }
 
 #copyright {
+      font-size: 14px;
       color: gray;
 }
 
@@ -40,17 +64,24 @@ footer {
 }
 
 .container {
-      background: whitesmoke;
       min-width: 400px;
-      width: 50%;
-      border: 1px solid black;
-      padding: 0 50px;
+      max-width: 50%;
+      /* border: 1px solid black; */
+      /* padding: 0 50px; */
 }
 
 .blog-post {
-      padding: 60px 0;
-      border: 1px solid gray;
+      padding: 30px 0;
+      margin: 50px 0;
+      /* border: 1px solid darkgray; */
+      border-radius: 2px;
       width: 100%;
+      background: whitesmoke;
+      box-shadow: 0.5px 0.5px 3px 1px lightgray;
+}
+
+.blog-post-description {
+      color: grey;
 }
 
 .content {
