@@ -29,6 +29,7 @@ app.use(methodOverride("_method"));
 
 const postSchema = new mongoose.Schema({
       title: String,
+      link: String,
       content: String
 });
 
@@ -73,6 +74,7 @@ app.post("/posts", function(req, res){
 
       const newPost = {
             title: req.body.title,
+            link: req.body.link,
             content: req.body.content
       }
 
