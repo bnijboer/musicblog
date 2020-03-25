@@ -7,6 +7,7 @@ html {
 body {
       height: 100%;
       margin:  0px auto;
+      margin-top: 56px;
       padding: 0px auto;
       /* min-height: 100vh; */
       background-image: url("../images/background.jpg");
@@ -14,9 +15,46 @@ body {
       background-size: cover;
       background-attachment: fixed;
       background-position-y: 58%;
+      font-family: 'Lato', sans-serif;
       
       /* border: 2px solid green; */
       /* height: auto; */
+}
+
+.navbar {
+      transition: top 0.5s ease;
+  }
+  
+  .navbar-hide {
+      top: -56px;
+  }
+
+  
+
+
+    .nav-item a {
+      /* float: left; */
+      /* display: block; */
+      /* color: #f2f2f2; */
+      /* text-align: center; */
+      padding: 0px 16px;
+      /* text-decoration: none; */
+      /* font-size: 17px; */
+      border-bottom: 1px solid transparent;
+    }
+    
+    .nav-item a:hover {
+      border-bottom: 1px solid lightgrey;
+    }
+    
+    .nav-item a.active {
+      border-bottom: 3px solid red;
+    }
+
+ .form-control, .form-control:focus{border-color: darkgrey;  box-shadow: none; -webkit-box-shadow: none;} 
+
+.test {
+      /* width: 100%; */
 }
 
 #wrapper {
@@ -31,10 +69,29 @@ body {
       
 }
 
-.jumbotron {
+.banner {
       background-image: url("../images/header.jpg");
       background-repeat: no-repeat;
       background-size: cover;
+      /* border-radius: 0; */
+      box-shadow: 0 4px 2px -2px darkkhaki;
+      height: 30vh;
+}
+
+h2 {
+      font-family: 'Maven Pro', sans-serif;
+}
+
+h3 {
+      font-size: 40px;
+      color: white;
+      text-shadow: 1px 1px 2px darkgray;
+}
+
+h4 {
+      font-size: 30px;
+      color: lightgray;
+      text-shadow: 1px 1px 2px darkgray;
 }
 
 div {
@@ -46,12 +103,13 @@ hr {
 }
 
 footer {
-      position: fixed;
+      /* position: fixed;
       left: 0;
       bottom: 0;
       width: 100%;
       padding: 0 10px;
-      padding-bottom: 10px;
+      padding-bottom: 10px; */
+      background: rgba(0,0,0,0.1);
 }
 
 #copyright {
@@ -80,8 +138,38 @@ footer {
       box-shadow: 0.5px 0.5px 3px 1px lightgray;
 }
 
+.blog-post-title,
+.blog-post-link,
+.blog-post-description,
+.blog-post-tags {
+      padding: 0 20px;
+      text-align: center;
+}
+
 .blog-post-description {
       color: grey;
+}
+
+.blog-post-tags {
+      color: lightgrey;
+}
+
+.button-wrapper {
+      margin-top: 50px;
+      width: 100%;
+      padding: 0 20px;
+}
+
+.form-btn {
+      width: 90px;
+}
+
+.new-form {
+      width: 100%;
+}
+
+input, textarea {
+      padding: 5px;
 }
 
 .content {

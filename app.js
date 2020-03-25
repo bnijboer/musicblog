@@ -47,7 +47,8 @@ passport.deserializeUser(User.deserializeUser());
 const postSchema = new mongoose.Schema({
       title: String,
       link: String,
-      content: String
+      content: String,
+      tags: String
 });
 
 const Post = mongoose.model("Post", postSchema);
@@ -95,13 +96,17 @@ app.post("/signup", function(req, res){
 
 // LANDING
 app.get("/", function(req, res){
-      res.render("home");
+      res.render("landing");
 });
 
+app.get("/about", function(req, res){
+      res.render("about");
+});
 
 // INDEX
 // Show all posts
 app.get("/posts", function(req, res){
+ 
       Post.find({}, function(err, posts){
             if(err){
                   console.log(err);
@@ -126,7 +131,8 @@ app.post("/posts", function(req, res){
       const newPost = {
             title: req.body.title,
             link: req.body.link,
-            content: req.body.content
+            content: req.body.content,
+            tags: req.body.tags
       }
 
       Post.create(newPost, function(err, newPost){

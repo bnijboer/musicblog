@@ -1,20 +1,28 @@
 <%- include("partials/header") %>
 
 <div class="container">
-      <div class="row">
-            <div class="col-lg-12">
-                  <h1>New post</h1>
-            </div>
-      </div>
-      <div class="row">
-            <div class="col-lg-12">
-                  <form action="/posts" method="POST">
-                        <input type="text" name="title" placeholder="Enter post title">
-                        <input type="text" name="link" placeholder="Paste embedded link">
+
+      <div class="blog-post">
+            <form action="/posts" method="POST">
+                  <div class="blog-post-title">
+                        <input class="new-form" type="text" name="title" placeholder="Enter post title">
+                  </div>
+                  <hr>
+                  <div class="blog-post-link">
+                        <input class="new-form" type="text" name="link" placeholder="Paste embedded link">
+                  </div>
+                  <hr>
+                  <div class="blog-post-description">
                         <textarea class="edit-field" type="text" name="content" placeholder="Type content"></textarea>
-                        <button class="btn btn-success">Post</button>
-                  </form>
-            </div>
+                  </div>
+                  <hr>
+                  <div class="blog-post-tags">
+                        <input class="new-form" type="text" name="tags" placeholder="Add tag">
+                  </div>
+                  <div class="d-flex justify-content-end button-wrapper">
+                        <button class="btn btn-outline-success form-btn">Post</button>
+                  </div>
+            </form>
       </div>
 </div>
 
