@@ -28,12 +28,17 @@
                         <li class="nav-item">
                               <a class="nav-link" href="/about">About</a>
                         </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="/posts/new">Create post</a>
-                        </li>
-                        <li class="nav-item">
-                              <a class="nav-link" href="#">Log in</a>
-                        </li>
+                        <% if(currentUser){ %>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="/posts/new">Create post</a>
+                              </li>
+                              <li class="nav-item">
+                                    <a class="nav-link">Logged in as: <%= currentUser.username %></a>
+                              </li>
+                              <li class="nav-item">
+                                    <a class="nav-link" href="/logout">Log out</a>
+                              </li>
+                        <% } %>
                     </ul>
                         <form class="form-inline my-2 my-lg-0">
                               <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

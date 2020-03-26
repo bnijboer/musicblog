@@ -42,6 +42,13 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+//note to self: this is middleware that passes the currentUser variable to be passed to every page.
+// The reason this works is that this function is called on every single route.
+app.use(function(req, res, next){
+      res.locals.currentUser = req.user;
+      next();
+})
+
 // MONGOOSE MODEL CONFIG
 
 const postSchema = new mongoose.Schema({
@@ -61,13 +68,23 @@ const Post = mongoose.model("Post", postSchema);
 
 // AUTHENTICATION
 
-app.get("/secret", function(req, res){
-      res.send("secret");
-});
-
 
 app.get("/login", function(req, res){
       res.render("login");
+});
+
+
+// note to self: middleware is handled after post route is being hit, and before handler.
+// passport.authenticate takes username and password in the req.body (as send by the login form). It then compares them to the username and hashed password in the db.
+app.post("/login", passport.authenticate("local", {
+      successRedirect: "/posts",
+      failureRedirect: "/login"
+}), function(req, res){
+});
+
+app.get("/logout", function(req, res){
+      req.logout();
+      res.redirect("back");
 });
 
 
@@ -79,8 +96,9 @@ app.post("/signup", function(req, res){
       req.body.username;
       req.body.password;
 
+      const newUser =  new User({username: req.body.username});
       // creates a new user object and stores it into the db. Password is hashed.
-      User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+      User.register(newUser, req.body.password, function(err, user){
             if(err){
                   console.log(err);
                   return res.render("signup");
@@ -88,10 +106,9 @@ app.post("/signup", function(req, res){
 
             //logs user in, stores information and runs serializesession
             passport.authenticate("local")(req, res, function(){
-
+                  res.redirect("/posts");
             });
       });
-      res.redirect("/posts");
 });
 
 // LANDING
@@ -106,11 +123,11 @@ app.get("/about", function(req, res){
 // INDEX
 // Show all posts
 app.get("/posts", function(req, res){
- 
       Post.find({}, function(err, posts){
             if(err){
                   console.log(err);
             } else {
+                  // note to self: arguments passed into res.render must have object notation or mongoose will start bitching
                   res.render("posts", {posts: posts});
             }
       });
@@ -119,14 +136,14 @@ app.get("/posts", function(req, res){
 
 // NEW
 // posts/new - GET - shows new post form - no mongoose method
-app.get("/posts/new", function(req, res){
+app.get("/posts/new", isLoggedIn, function(req, res){
       res.render("new");
 });
 
 
 // CREATE
 // /posts - POST - create new post, then redirect somewhere - Post.create()
-app.post("/posts", function(req, res){
+app.post("/posts", isLoggedIn, function(req, res){
 
       const newPost = {
             title: req.body.title,
@@ -162,7 +179,7 @@ app.get("/posts/:id", function(req, res){
 
 // EDIT
 // /posts/:id/edit - GET - show edit form for one post - Post.findById()
-app.get("/posts/:id/edit", function(req, res){
+app.get("/posts/:id/edit", isLoggedIn, function(req, res){
       Post.findById(req.params.id, function(err, foundPost){
             if(err){
                   console.log(err);
@@ -176,7 +193,7 @@ app.get("/posts/:id/edit", function(req, res){
 
 // UPDATE
 // /posts/:id - PUT - update a particular post, then redirect somewhere - Post.findByIdAndUpdate()
-app.put("/posts/:id", function(req, res){
+app.put("/posts/:id", isLoggedIn, function(req, res){
       Post.findByIdAndUpdate(req.params.id, req.body, function(err, updatedPost){
             if(err){
                   console.log(err);
@@ -190,7 +207,7 @@ app.put("/posts/:id", function(req, res){
 
 // DELETE
 // /posts/:id - DELETE - delete a particular post, then redirect somewhere - Post.findByIdAndRemove()
-app.delete("/posts/:id", function(req, res){
+app.delete("/posts/:id", isLoggedIn, function(req, res){
       Post.findByIdAndRemove(req.params.id, function(err){
             if(err){
                   console.log(err);
@@ -201,6 +218,17 @@ app.delete("/posts/:id", function(req, res){
       });
 });
 
+// ==========
+// MIDDLEWARE
+// ==========
+
+function isLoggedIn(req, res, next){
+      if(req.isAuthenticated()){
+            return next();
+      } else {
+            res.redirect("/login")
+      }
+}
 
 
 // =================
