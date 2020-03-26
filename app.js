@@ -12,6 +12,7 @@ const express                 = require("express"),
       methodOverride          = require("method-override"),
       LocalStrategy           = require("passport-local"),
       User                    = require("./models/user"),
+      Post                    = require("./models/post")
       passportLocalMongoose   = require("passport-local-mongoose"),
       app                     = express();
 
@@ -48,17 +49,6 @@ app.use(function(req, res, next){
       res.locals.currentUser = req.user;
       next();
 })
-
-// MONGOOSE MODEL CONFIG
-
-const postSchema = new mongoose.Schema({
-      title: String,
-      link: String,
-      content: String,
-      tags: String
-});
-
-const Post = mongoose.model("Post", postSchema);
 
 
 
