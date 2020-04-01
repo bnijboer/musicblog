@@ -7,6 +7,4 @@ const postSchema = new mongoose.Schema({
       tags: String
 });
 
-// const Post = mongoose.model("Post", postSchema);
-
 module.exports = mongoose.model("Post", postSchema);

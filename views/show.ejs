@@ -1,5 +1,6 @@
 <%- include("partials/header") %>
 
+
 <div class="container">
       <div class="blog-post">
             <div class="blog-post-title">
@@ -18,7 +19,7 @@
                   Style: <%- post.tags %>
             </div>
             <div class="d-inline-flex justify-content-between button-wrapper">
-                  <a class="btn btn-outline-secondary form-btn" href="/posts">Back</a>
+                  <button class="btn btn-outline-secondary form-btn" onclick="window.history.go(-1);">Back</button>
                   <% if(currentUser){ %>
                         <form action="/posts/<%= post._id %>/edit" method="GET">
                               <button class="btn btn-outline-warning form-btn">Edit</button>

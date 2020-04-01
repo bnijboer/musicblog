@@ -6,31 +6,40 @@
                   <h1>Blog post overview</h1>
             </div>
       </div>
-      <% for(var i = posts.length-1; i >= 0; i--){ %>
+      <% for(var i = 0; i < posts.results.length; i++){ %>
             <div class="blog-post">
                   <div class="blog-post-title">
-                        <h2><%= posts[i].title %></h2>
+                        <h2><%= posts.results[i].title %></h2>
                   </div>
                   <hr>
                   <div class="blog-post-link">
-                        <%- posts[i].link %>
+                        <%- posts.results[i].link %>
                   </div>
                   <hr>
                   <div class="blog-post-description">
-                        <%- posts[i].content.substring(0, 100) %>...
+                        <% if (posts.results[i].content.length > 100){ %>
+                              <%- posts.results[i].content.substring(0, 100) %>...
+                        <% } else { %>
+                              <%- posts.results[i].content -%>
+                       <% } %>
                   </div>
                   <div class="blog-post-description">
-                        <a href="/posts/<%= posts[i]._id %>">View post</a>
+                        <a href="/posts/<%= posts.results[i]._id %>">View post</a>
                   </div>
                   <hr>
                   <div class="blog-post-tags">
-                        Style: <%- posts[i].tags %>
+                        Style: <%- posts.results[i].tags %>
                   </div>
             </div>
       <% } %>
-      <div class="d-flex justify-content-around button-wrapper">
-            <button type="button" class="btn btn-dark btn-sm form-btn">Previous</button>
-            <button type="button" class="btn btn-dark btn-sm form-btn">Next</button>
+      <div class="d-flex justify-content-around button-wrapper pb-5">
+            <% if(posts.previous){ %>
+                  <a class="btn btn-dark btn-sm form-btn" href="/posts/?page=<%= posts.previous.page %>&limit=5">Previous</a>
+            <% } %>
+            
+            <% if(posts.next){ %>
+                  <a class="btn btn-dark btn-sm form-btn" href="/posts/?page=<%= posts.next.page %>&limit=5">Next</a>
+            <% } %>
       </div>
 </div>
 

@@ -1,11 +1,23 @@
 <%- include("partials/header") %>
 
-<h1>signup page</h1>
-
-<form action="/signup" method="POST">
-      <input type="text" placeholder="Choose username" name="username">
-      <input type="password" placeholder="Choose password" name="password">
-      <button class="btn btn-success">Complete</button>
-</form>
+<div class="d-flex justify-content-center container">
+      <div class="authentication-container">
+            <form action="/signup" method="POST">
+                        <div class="blog-post-title">
+                              <h2>Register</h2>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-center authentication-row">
+                              <input type="text" placeholder="Choose username" name="username">
+                        </div>
+                        <div class="d-flex justify-content-center authentication-row">
+                              <input type="password" placeholder="Choose password" name="password">
+                        </div>
+                        <div class="d-flex justify-content-center authentication-row">
+                              <button class="btn btn-outline-success form-btn">Sign up</button>
+                        </div>
+            </form>
+      </div>
+</div>
 
 <%- include("partials/footer") %>

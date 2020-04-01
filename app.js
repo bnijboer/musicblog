@@ -67,7 +67,7 @@ app.get("/login", function(req, res){
 // note to self: middleware is handled after post route is being hit, and before handler.
 // passport.authenticate takes username and password in the req.body (as send by the login form). It then compares them to the username and hashed password in the db.
 app.post("/login", passport.authenticate("local", {
-      successRedirect: "/posts",
+      successRedirect: "/posts?page=1&limit=5",
       failureRedirect: "/login"
 }), function(req, res){
 });
@@ -77,29 +77,29 @@ app.get("/logout", function(req, res){
       res.redirect("back");
 });
 
+//Sign up logic deactivated because I don't want other users to register for the time being.
+// app.get("/signup", function(req, res){
+//       res.render("signup");
+// });
 
-app.get("/signup", function(req, res){
-      res.render("signup");
-});
+// app.post("/signup", function(req, res){
+//       req.body.username;
+//       req.body.password;
 
-app.post("/signup", function(req, res){
-      req.body.username;
-      req.body.password;
+//       const newUser =  new User({username: req.body.username});
+//       // creates a new user object and stores it into the db. Password is hashed.
+//       User.register(newUser, req.body.password, function(err, user){
+//             if(err){
+//                   console.log(err);
+//                   return res.render("signup");
+//             }
 
-      const newUser =  new User({username: req.body.username});
-      // creates a new user object and stores it into the db. Password is hashed.
-      User.register(newUser, req.body.password, function(err, user){
-            if(err){
-                  console.log(err);
-                  return res.render("signup");
-            }
-
-            //logs user in, stores information and runs serializesession
-            passport.authenticate("local")(req, res, function(){
-                  res.redirect("/posts");
-            });
-      });
-});
+//             //logs user in, stores information and runs serializesession
+//             passport.authenticate("local")(req, res, function(){
+//                   res.redirect("/posts?page=1&limit=5");
+//             });
+//       });
+// });
 
 // LANDING
 app.get("/", function(req, res){
@@ -112,13 +112,18 @@ app.get("/about", function(req, res){
 
 // INDEX
 // Show all posts
-app.get("/posts", function(req, res){
+app.get("/posts", paginatedResults(Post), function(req, res){
+      
       Post.find({}, function(err, posts){
+            // console.log(posts.reverse());
             if(err){
                   console.log(err);
             } else {
                   // note to self: arguments passed into res.render must have object notation or mongoose will start bitching
-                  res.render("posts", {posts: posts});
+                  
+                  var results = res.paginatedResults;
+                  res.render("posts", {posts: results});
+                  
             }
       });
 });
@@ -147,7 +152,7 @@ app.post("/posts", isLoggedIn, function(req, res){
                   console.log(err);
                   res.render("new");
             } else {
-                  res.redirect("/posts");
+                  res.redirect("/posts?page=1&limit=5");
             }
       });
 });
@@ -159,7 +164,7 @@ app.get("/posts/:id", function(req, res){
       Post.findById(req.params.id, function(err, foundPost){
             if(err){
                   console.log(err);
-                  res.redirect("/posts");
+                  res.redirect("/posts?page=1&limit=5");
             } else {
                   res.render("show", {post: foundPost});
             }
@@ -173,7 +178,7 @@ app.get("/posts/:id/edit", isLoggedIn, function(req, res){
       Post.findById(req.params.id, function(err, foundPost){
             if(err){
                   console.log(err);
-                  res.redirect("/posts");
+                  res.redirect("/posts?page=1&limit=5");
             } else {
                   res.render("edit", {post: foundPost});
             }
@@ -187,7 +192,7 @@ app.put("/posts/:id", isLoggedIn, function(req, res){
       Post.findByIdAndUpdate(req.params.id, req.body, function(err, updatedPost){
             if(err){
                   console.log(err);
-                  res.redirect("/posts");
+                  res.redirect("/posts?page=1&limit=5");
             } else {
                   res.redirect("/posts/" + req.params.id);
             }
@@ -201,9 +206,9 @@ app.delete("/posts/:id", isLoggedIn, function(req, res){
       Post.findByIdAndRemove(req.params.id, function(err){
             if(err){
                   console.log(err);
-                  res.redirect("/posts");
+                  res.redirect("/posts?page=1&limit=5");
             } else {
-                  res.redirect("/posts");
+                  res.redirect("/posts?page=1&limit=5");
             }
       });
 });
@@ -219,6 +224,43 @@ function isLoggedIn(req, res, next){
             res.redirect("/login")
       }
 }
+
+function paginatedResults(model){
+      return async (req, res, next) => {
+            const page = parseInt(req.query.page);
+            const limit = parseInt(req.query.limit);
+            
+            const startIndex = (page - 1) * limit;
+            const endIndex = page * limit;
+      
+            const results = {};
+      
+      
+      
+            if(endIndex < await model.countDocuments().exec()){
+                  results.next = {
+                        page: page + 1,
+                        limit: limit
+                  }
+            }
+      
+            if(startIndex > 0){
+                  results.previous = {
+                        page: page - 1,
+                        limit: limit
+                  }
+            }
+
+            try {
+                  results.results = await model.find().limit(limit).skip(startIndex).exec();
+                  res.paginatedResults = results;
+                  next();
+            } catch (e) {
+                  res.status(500).json({ message: e.message });
+            }
+      }
+}
+
 
 
 // =================
