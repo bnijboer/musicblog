@@ -6,8 +6,6 @@
 
 html, body {
       height: 100vh;
-      margin:  0 auto;
-      padding: 0 auto;
 }
 
 body {
@@ -50,6 +48,10 @@ textarea {
       font-size: 20px;
 }
 
+#logout-btn:hover {
+      font-size: 22px;
+}
+
 footer {
       color: #b8b894;
       text-align: end;
@@ -73,7 +75,7 @@ h3 {
 }
 
 hr {
-      width: 85%;
+      width: 80%;
 }
 
 .container {
@@ -99,6 +101,13 @@ hr {
 
 .desc {
       color: grey;
+      padding: 0 50px;
+}
+
+pre {
+      text-align: left;
+      white-space: pre-wrap;
+      font-family: 'Lato', sans-serif;
 }
 
 .tags {
@@ -125,7 +134,7 @@ hr {
 .auth {
       min-width: 350px;
       width: 65%;
-      margin: 0 auto;
+      margin: 160px auto 0;
 }
 
 .auth-row {

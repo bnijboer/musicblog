@@ -1,4 +1,4 @@
-<%- include("partials/header") %>
+<%- include("../partials/header") %>
 
 <div class="container">
       <% for(var i = 0; i < posts.results.length; i++){ %>
@@ -19,7 +19,7 @@
                        <% } %>
                   </div>
                   <div class="content desc">
-                        <a href="/posts/<%= posts.results[i]._id %>">View post</a>
+                        <a href="/posts/<%= posts.results[i]._id %>">Show post</a>
                   </div>
                   <hr>
                   <div class="content tags">
@@ -39,4 +39,4 @@
 </div>
 
 
-<%- include("partials/footer") %>
+<%- include("../partials/footer") %>
