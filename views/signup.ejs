@@ -1,20 +1,20 @@
 <%- include("partials/header") %>
 
-<div class="d-flex justify-content-center container">
-      <div class="authentication-container">
+<div class="container">
+      <div class="post auth">
             <form action="/signup" method="POST">
-                        <div class="blog-post-title">
+                        <div class="content">
                               <h2>Register</h2>
                         </div>
                         <hr>
-                        <div class="d-flex justify-content-center authentication-row">
-                              <input type="text" placeholder="Choose username" name="username">
+                        <div class="auth-row">
+                              <input class="auth-form" type="text" placeholder="Choose username" name="username">
                         </div>
-                        <div class="d-flex justify-content-center authentication-row">
-                              <input type="password" placeholder="Choose password" name="password">
+                        <div class="auth-row">
+                              <input class="auth-form" type="password" placeholder="Choose password" name="password">
                         </div>
-                        <div class="d-flex justify-content-center authentication-row">
-                              <button class="btn btn-outline-success form-btn">Sign up</button>
+                        <div class="auth-row">
+                              <button class="btn btn-outline-success auth-form">Sign up</button>
                         </div>
             </form>
       </div>

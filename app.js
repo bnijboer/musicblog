@@ -77,29 +77,29 @@ app.get("/logout", function(req, res){
       res.redirect("back");
 });
 
-//Sign up logic deactivated because I don't want other users to register for the time being.
-// app.get("/signup", function(req, res){
-//       res.render("signup");
-// });
+// Sign up logic deactivated because I don't want other users to register for the time being.
+app.get("/signup", function(req, res){
+      res.render("signup");
+});
 
-// app.post("/signup", function(req, res){
-//       req.body.username;
-//       req.body.password;
+app.post("/signup", function(req, res){
+      req.body.username;
+      req.body.password;
 
-//       const newUser =  new User({username: req.body.username});
-//       // creates a new user object and stores it into the db. Password is hashed.
-//       User.register(newUser, req.body.password, function(err, user){
-//             if(err){
-//                   console.log(err);
-//                   return res.render("signup");
-//             }
+      const newUser =  new User({username: req.body.username});
+      // creates a new user object and stores it into the db. Password is hashed.
+      User.register(newUser, req.body.password, function(err, user){
+            if(err){
+                  console.log(err);
+                  return res.render("signup");
+            }
 
-//             //logs user in, stores information and runs serializesession
-//             passport.authenticate("local")(req, res, function(){
-//                   res.redirect("/posts?page=1&limit=5");
-//             });
-//       });
-// });
+            //logs user in, stores information and runs serializesession
+            passport.authenticate("local")(req, res, function(){
+                  res.redirect("/posts?page=1&limit=5");
+            });
+      });
+});
 
 // LANDING
 app.get("/", function(req, res){
