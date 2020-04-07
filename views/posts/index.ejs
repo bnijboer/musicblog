@@ -4,7 +4,7 @@
       <% for(var i = 0; i < posts.results.length; i++){ %>
             <div class="post">
                   <div class="content">
-                        <h2><%= posts.results[i].title %></h2>
+                        <h3><%= posts.results[i].title %></h3>
                   </div>
                   <hr>
                   <div class="content">
@@ -19,7 +19,7 @@
                        <% } %>
                   </div>
                   <div class="content desc">
-                        <a href="/posts/<%= posts.results[i]._id %>">Show post</a>
+                        <a class="show-link" href="/posts/<%= posts.results[i]._id %>">Show post</a>
                   </div>
                   <hr>
                   <div class="content tags">
@@ -27,13 +27,13 @@
                   </div>
             </div>
       <% } %>
-      <div class="d-flex justify-content-around btn-container pb-5">
+      <div class="d-flex justify-content-center btn-container pb-5">
             <% if(posts.previous){ %>
-                  <a class="btn btn-dark btn-sm form-btn" href="/posts/?page=<%= posts.previous.page %>&limit=5">Previous</a>
+                  <a href="/posts/?page=<%= posts.previous.page %>&limit=5"><i class="fas fa-caret-left"></i></a>
             <% } %>
             
             <% if(posts.next){ %>
-                  <a class="btn btn-dark btn-sm form-btn" href="/posts/?page=<%= posts.next.page %>&limit=5">Next</a>
+                  <a href="/posts/?page=<%= posts.next.page %>&limit=5"><i class="fas fa-caret-right"></i></a>
             <% } %>
       </div>
 </div>
