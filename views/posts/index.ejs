@@ -1,39 +1,53 @@
 <%- include("../partials/header") %>
 
 <div class="container">
-      <% for(var i = 0; i < posts.results.length; i++){ %>
+      <% for(var i = 0; i < posts.paginatedResults.length; i++){ %>
             <div class="post">
                   <div class="content">
-                        <h3><%= posts.results[i].title %></h3>
+                        Posted by <%= posts.paginatedResults[i].author %> on <%= posts.paginatedResults[i].datePosted %>
                   </div>
                   <hr>
-                  <div class="content">
-                        <%- posts.results[i].link %>
-                  </div>
-                  <hr>
-                  <div class="content desc">
-                        <% if (posts.results[i].content.length > 100){ %>
-                              <%- posts.results[i].content.substring(0, 100) %>...
-                        <% } else { %>
-                              <%- posts.results[i].content -%>
-                       <% } %>
-                  </div>
-                  <div class="content desc">
-                        <a class="show-link" href="/posts/<%= posts.results[i]._id %>">Show post</a>
-                  </div>
-                  <hr>
-                  <div class="content tags">
-                        Style: <%- posts.results[i].tags %>
-                  </div>
+                  <% if (posts.paginatedResults[i].title){ %>
+                        <div class="content">
+                              <h3><%= posts.paginatedResults[i].title %></h3>
+                        </div>
+                        <hr>
+                  <% }  %>
+                  <% if (posts.paginatedResults[i].link){ %>
+                        <div class="content">
+                              <%- posts.paginatedResults[i].link %>
+                        </div>
+                        <hr>
+                  <% }  %>
+                  <% if (posts.paginatedResults[i].content){ %>
+                        <div class="content desc">
+                              <% if (posts.paginatedResults[i].content.length > 100){ %>
+                                    <%- posts.paginatedResults[i].content.substring(0, 100) %>...
+                              <% } else { %>
+                                    <%- posts.paginatedResults[i].content -%>
+                             <% } %>
+                             <div class="content desc">
+                                    <a class="show-link" href="/posts/<%= posts.paginatedResults[i]._id %>">View post</a>
+                              </div>
+                        </div>
+                        <hr>
+                  <% }  %>
+                  <% if (posts.paginatedResults[i].tags){ %>
+                        <div class="content tags">
+                              Style: <%- posts.paginatedResults[i].tags %>
+                        </div>
+                  <% }  %>
             </div>
       <% } %>
       <div class="d-flex justify-content-center btn-container pb-5">
             <% if(posts.previous){ %>
-                  <a href="/posts/?page=<%= posts.previous.page %>&limit=5"><i class="fas fa-caret-left"></i></a>
+                  <a href="/posts/?page=1&limit=5"><i class="fas fa-angle-double-left"></i></a>
+                  <a href="/posts/?page=<%= posts.previous.page %>&limit=5"><i class="fas fa-angle-left"></i></a>
             <% } %>
             
             <% if(posts.next){ %>
-                  <a href="/posts/?page=<%= posts.next.page %>&limit=5"><i class="fas fa-caret-right"></i></a>
+                  <a href="/posts/?page=<%= posts.next.page %>&limit=5"><i class="fas fa-angle-right"></i></a>
+                  <a href="/posts/?page=<%= posts.last.page %>&limit=5"><i class="fas fa-angle-double-right"></i></a>
             <% } %>
       </div>
 </div>

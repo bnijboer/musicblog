@@ -1,23 +1,51 @@
 const express     = require("express"),
       router      = express.Router(),
       Post        = require("../models/post"),
-      middleware  = require("../middleware");
+      middleware  = require("../middleware"),
+      scripts     = require("../scripts/scripts");
 
 // INDEX
 // Show all posts
-router.get("/", middleware.paginatedResults(Post), function(req, res){
-      Post.find({}, function(err, posts){
-            // console.log(posts.reverse());
-            if(err){
-                  console.log(err);
-            } else {
-                  // note to self: arguments passed into res.render must have object notation or mongoose will start bitching
-                  
-                  var results = res.paginatedResults;
-                  res.render("posts/index", {posts: results, currentUser: req.user});
-                  
+// router.get("/", function(req, res){
+//       Post.find({}, function(err, posts){
+//             console.log(posts[posts.length-1]);
+
+//       });
+// });
+
+
+router.get("/", function(req, res){
+            const page = parseInt(req.query.page);
+            const limit = parseInt(req.query.limit);
+            const startIndex = (page - 1) * limit;
+            const endIndex = page * limit;
+            const results = {};
+
+            // if endIndex is larger than or equal to the amount of posts, the if-statement doesn't trigger, results.next is undefined and the next button won't show up
+            Post.countDocuments({}, function(err, postCount){
+                  if(endIndex < postCount){
+                        results.last = {
+                              page: Math.ceil(postCount/limit),
+                              limit: limit
+                        }
+                        results.next = {
+                              page: page + 1,
+                              limit: limit
+                        }
+                  }
+            });
+
+            if(startIndex > 0){
+                  results.previous = {
+                        page: page - 1,
+                        limit: limit
+                  }
             }
-      });
+
+            Post.find({}, function(err, posts){
+                  results.paginatedResults = posts;
+                  res.render("posts/index", {posts: results, currentUser: req.user});
+            }).sort({dateISO: -1}).limit(limit).skip(startIndex).exec();
 });
 
 
@@ -36,7 +64,10 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             title: req.body.title,
             link: req.body.link,
             content: req.body.content,
-            tags: req.body.tags
+            tags: req.body.tags,
+            author: req.user.username,
+            datePosted: scripts.fetchDate(),
+            dateISO: Date.now()
       }
 
       Post.create(newPost, function(err, newPost){
@@ -67,6 +98,7 @@ router.get("/:id", function(req, res){
 // EDIT
 // /posts/:id/edit - GET - show edit form for one post - Post.findById()
 router.get("/:id/edit", middleware.isLoggedIn, function(req, res){
+      console.log("test");
       Post.findById(req.params.id, function(err, foundPost){
             if(err){
                   console.log(err);

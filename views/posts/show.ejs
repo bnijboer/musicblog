@@ -2,22 +2,30 @@
 
 
 <div class="container">
-      <div class="post">
-            <div class="content">
-                  <h3><%= post.title %></h3>
-            </div>
-            <hr>
-            <div class="content">
-                  <%- post.link %>
-            </div>
-            <hr>
-            <div class="content">
-                  <pre class="desc"><%- post.content %></pre>
-            </div>
-            <hr>
-            <div class="content tags">
-                  Style: <%- post.tags %>
-            </div>
+      <div class="post">            
+            <% if (post.title){ %>
+                  <div class="content">
+                        <h3><%= post.title %></h3>
+                  </div>
+                  <hr>
+            <% }  %>
+            <% if (post.link){ %>
+                  <div class="content">
+                        <%- post.link %>
+                  </div>
+                  <hr>
+            <% }  %>
+            <% if (post.content){ %>
+                  <div class="content">
+                        <pre class="desc"><%- post.content %></pre>
+                  </div>
+                  <hr>
+            <% }  %>
+            <% if (post.tags){ %>
+                  <div class="content tags">
+                        Style: <%- post.tags %>
+                  </div>
+            <% }  %>
             <div class="d-flex justify-content-between btn-container">
                   <button class="btn btn-outline-secondary form-btn" onclick="window.history.go(-1);">Back</button>
                   <% if(currentUser){ %>

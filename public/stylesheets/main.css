@@ -165,7 +165,7 @@ h1 {
       text-shadow: 1.2px 1.2px 1px lightslategray;
 }
 
-h1:nth-of-type(odd) {
+h1:nth-of-type(even) {
       color: lightgray;
       font-size: 27px;
 }
@@ -198,6 +198,11 @@ h3 {
       color: rgb(74, 92, 42);
       font-size: 36px;
       text-shadow: 0.7px 0.7px 1px gray;
+      
+}
+
+span {
+      text-align: left;
 }
 
 hr {
@@ -225,7 +230,7 @@ hr {
 
 .desc {
       color: grey;
-      padding: 0 50px;
+      padding: 25px 50px 15px 50px;
       font-size: 18px;
 }
 
@@ -242,12 +247,13 @@ pre {
 .show-link {
       color: rgb(74, 92, 42);
       text-shadow: 0.1px 0.1px 0.2px gray;
-      line-height: 4;
-      font-size: 16px;
+      font-size: 15px;
 }
 
 .show-link:hover {
-      color: rgb(45, 56, 25);
+      text-decoration: none;
+      text-shadow: 0.5px 0.5px 1px lightcoral;
+      color: rgb(74, 92, 42);
 }
 
 .btn-container {
@@ -260,14 +266,14 @@ pre {
       width: 90px;
 }
 
-.fa-caret-left, .fa-caret-right {
+.fa-angle-left, .fa-angle-double-left, .fa-angle-right, .fa-angle-double-right {
       color: whitesmoke;
-      font-size: 65px;
-      padding: 0 30px;
+      font-size: 40px;
+      padding: 0 30px 50px 30px;
       text-shadow: 0.5px 0.5px 2px black, 0 0 1px gray;
 }
 
-.fa-caret-left:hover {
+.fa-angle-left:hover, .fa-angle-double-left:hover {
       animation: move-left 2s infinite;
 }
 
@@ -313,7 +319,7 @@ pre {
       }
 }
 
-.fa-caret-right:hover {
+.fa-angle-right:hover, .fa-angle-double-right:hover {
       animation: move-right 2s infinite;
 }
 
