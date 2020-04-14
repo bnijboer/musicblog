@@ -27,3 +27,6 @@ Final product screenshots:
 
 ![Alt text](/screenshots/10.jpg?raw=true "preview")
 
+![Alt text](/screenshots/11.jpg?raw=true "preview")
+
+![Alt text](/screenshots/12.jpg?raw=true "preview")
