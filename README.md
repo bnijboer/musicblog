@@ -16,3 +16,5 @@ Possible functionalities to add in the future:
 - Jump to page numbers
 - Suggested posts
 - Email subscription option
+
+![Alt text](/screenshots/1.jpg?raw=true "preview")
