@@ -4,42 +4,6 @@ const express     = require("express"),
       middleware  = require("../middleware"),
       scripts     = require("../scripts/scripts");
 
-// // SEARCH
-// router.get("/:tags", function(req, res){
-//       const searchQuery = parseInt(req.query.searchQuery);
-//       const page = parseInt(req.query.page);
-//       const limit = parseInt(req.query.limit);
-//       const startIndex = (page - 1) * limit;
-//       const endIndex = page * limit;
-//       const results = {};
-
-//       // if endIndex is larger than or equal to the amount of posts, the if-statement doesn't trigger, results.next is undefined and the next button won't show up
-//       Post.countDocuments({}, function(err, postCount){
-//             if(endIndex < postCount){
-//                   results.last = {
-//                         page: Math.ceil(postCount/limit),
-//                         limit: limit
-//                   }
-//                   results.next = {
-//                         page: page + 1,
-//                         limit: limit
-//                   }
-//             }
-//       });
-
-//       if(startIndex > 0){
-//             results.previous = {
-//                   page: page - 1,
-//                   limit: limit
-//             }
-//       }
-
-//       Post.find({tags: searchQuery}, function(err, posts){
-//             results.paginatedResults = posts;
-//             res.render("posts/index", {posts: results, currentUser: req.user});
-//       }).sort({dateISO: -1}).limit(limit).skip(startIndex).exec();
-// });
-
 // INDEX
 // Show all posts
 router.get("/", function(req, res){
@@ -76,52 +40,6 @@ router.get("/", function(req, res){
             }).sort({dateISO: -1}).limit(limit).skip(startIndex).exec();
 });
 
-// // SEARCH
-// router.get('/search/:title', middleware.formatSearch, function(req, res) {
-//       var title = req.params.title;
-//       Product.find({title: title}, function (err, posts) {
-//             if(err) {
-//                   return res.render('posts/search', {posts: null});
-//             } else {
-//                   return res.render('posts/search', {posts: posts});
-//             }
-//       });
-// });
-
-
-// FILTER
-router.get("/filter", function(req, res){
-      const page = parseInt(req.query.page);
-      const limit = parseInt(req.query.limit);
-      const startIndex = (page - 1) * limit;
-      const endIndex = page * limit;
-      const results = {};
-
-
-      
-      Post.find({tags: req.query.tags}, function(err, posts){
-            if(endIndex < posts.length){
-                  results.last = {
-                        page: Math.ceil(posts.length/limit),
-                        limit: limit
-                  }
-                  results.next = {
-                        page: page + 1,
-                        limit: limit
-                  }
-            }
-
-            if(startIndex > 0){
-                  results.previous = {
-                        page: page - 1,
-                        limit: limit
-                  }
-            }
-
-            results.paginatedResults = posts;
-            return res.render("posts/filter", {posts: results, currentUser: req.user});
-      }).sort({dateISO: -1}).limit(limit).skip(startIndex).exec();
-});
 
 // NEW
 // posts/new - GET - shows new post form - no mongoose method

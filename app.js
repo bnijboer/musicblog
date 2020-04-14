@@ -12,8 +12,6 @@ const express                 = require("express"),
       methodOverride          = require("method-override"),
       LocalStrategy           = require("passport-local"),
       User                    = require("./models/user"),
-      // Post                    = require("./models/post"),
-      // passportLocalMongoose   = require("passport-local-mongoose"),
       app                     = express();
 
 

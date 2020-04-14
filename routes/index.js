@@ -19,25 +19,25 @@ router.get("/about", function(req, res){
 // AUTHENTICATION
 
 // Sign up logic deactivated because I don't want other users to register for the time being.
-router.get("/signup", function(req, res){
-      return res.render("signup", {currentUser: req.user});
-});
+// router.get("/signup", function(req, res){
+//       return res.render("signup", {currentUser: req.user});
+// });
 
-router.post("/signup", function(req, res){
-      const newUser =  new User({username: req.body.username});
-      // creates a new user object and stores it into the db. Password is hashed.
-      User.register(newUser, req.body.password, function(err, user){
-            if(err){
-                  console.log(err);
-                  return res.redirect("signup");
-            }
+// router.post("/signup", function(req, res){
+//       const newUser =  new User({username: req.body.username});
+//       // creates a new user object and stores it into the db. Password is hashed.
+//       User.register(newUser, req.body.password, function(err, user){
+//             if(err){
+//                   console.log(err);
+//                   return res.redirect("signup");
+//             }
 
-            //logs user in, stores information and runs serializesession
-            passport.authenticate("local")(req, res, function(){
-                  return res.redirect("/posts?page=1&limit=5");
-            });
-      });
-});
+//             //logs user in, stores information and runs serializesession
+//             passport.authenticate("local")(req, res, function(){
+//                   return res.redirect("/posts?page=1&limit=5");
+//             });
+//       });
+// });
 
 router.get("/login", function(req, res){
       return res.render("login", {currentUser: req.user});
