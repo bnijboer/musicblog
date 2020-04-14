@@ -1,41 +1,55 @@
 <%- include("../partials/header") %>
 
-
-<div class="container">
-      <div class="post">            
+<div class="container col-sm-12 col-lg-7 my-5">
+      <div class="post">
+            <div class="content d-flex justify-content-between pt-4">
+                  <div class="metadata">
+                        <%= post.datePosted %> <span class="px-1">|</span> <i class="fas fa-user pr-1"></i> <%= post.author %>
+                  </div>
+                  <div>
+                        <% if(currentUser){ %>
+                              <form class="d-inline" action="/posts/<%= post._id %>/edit" method="GET">
+                                    <button class="admin-button"><i class="fas fa-edit mr-1"></i></button>
+                              </form>
+                              <form class="d-inline" action="/posts/<%= post._id %>?_method=DELETE" method="POST">
+                                    <button class="admin-button" onclick="return confirm('Are you sure you want to delete this post?');"><i class="fas fa-trash"></i></button>
+                              </form>
+                        <% } %>
+                  </div>
+            </div>
             <% if (post.title){ %>
-                  <div class="content">
+                  <div class="pt-5">
                         <h3><%= post.title %></h3>
                   </div>
-                  <hr>
             <% }  %>
+            <% if (post.artist){ %>
+                  <div>
+                        <h4><%= post.artist %></h4>
+                  </div>
+            <% } %>
+            <% if (post.title || post.artist){ %>
+                  <hr class="section-end">
+            <% } else { %>
+                  <div class="pb-5"></div>
+            <% } %>
             <% if (post.link){ %>
                   <div class="content">
                         <%- post.link %>
                   </div>
-                  <hr>
-            <% }  %>
-            <% if (post.content){ %>
-                  <div class="content">
-                        <pre class="desc"><%- post.content %></pre>
-                  </div>
-                  <hr>
             <% }  %>
             <% if (post.tags){ %>
-                  <div class="content tags">
+                  <div class="content metadata pt-3 pb-4">
                         Style: <%- post.tags %>
                   </div>
             <% }  %>
-            <div class="d-flex justify-content-between btn-container">
+            <% if (post.content){ %>
+                  <div class="content">
+                        <pre class="desc text-center"><%- post.content %></pre>
+                  </div>
+            <% }  %>
+
+            <div class="btn-container text-center">
                   <button class="btn btn-outline-secondary form-btn" onclick="window.history.go(-1);">Back</button>
-                  <% if(currentUser){ %>
-                        <form action="/posts/<%= post._id %>/edit" method="GET">
-                              <button class="btn btn-outline-warning form-btn">Edit</button>
-                        </form>
-                        <form action="/posts/<%= post._id %>?_method=DELETE" method="POST">
-                              <button class="btn btn-outline-danger form-btn" onclick="return confirm('Are you sure you want to delete this post?');">Delete</button>
-                        </form>
-                  <% } %>
             </div>
       </div>
 </div>

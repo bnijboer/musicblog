@@ -9,18 +9,18 @@ const express     = require("express"),
 
 // Root route
 router.get("/", function(req, res){
-      res.render("landing", {currentUser: req.user});
+      return res.render("landing", {currentUser: req.user});
 });
 
 router.get("/about", function(req, res){
-      res.render("about", {currentUser: req.user});
+      return res.render("about", {currentUser: req.user});
 });
 
 // AUTHENTICATION
 
 // Sign up logic deactivated because I don't want other users to register for the time being.
 router.get("/signup", function(req, res){
-      res.render("signup", {currentUser: req.user});
+      return res.render("signup", {currentUser: req.user});
 });
 
 router.post("/signup", function(req, res){
@@ -34,13 +34,13 @@ router.post("/signup", function(req, res){
 
             //logs user in, stores information and runs serializesession
             passport.authenticate("local")(req, res, function(){
-                  res.redirect("/posts?page=1&limit=5");
+                  return res.redirect("/posts?page=1&limit=5");
             });
       });
 });
 
 router.get("/login", function(req, res){
-      res.render("login", {currentUser: req.user});
+      return res.render("login", {currentUser: req.user});
 });
 
 
@@ -54,7 +54,7 @@ router.post("/login", passport.authenticate("local", {
 
 router.get("/logout", function(req, res){
       req.logout();
-      res.redirect("back");
+      return res.redirect("back");
 });
 
 module.exports = router;

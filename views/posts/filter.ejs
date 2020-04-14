@@ -1,0 +1,77 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+      <div class="section-title">
+            POST OVERVIEW
+            <form action="/filter">
+                  <input type="checkbox" id="style1" name="style1" value="techno">
+                  <label for="style1">techno</label><br>
+                  <input type="checkbox" id="style2" name="style2" value="ambient">
+                  <label for="style2">ambient</label><br><br>
+                  <input type="submit" value="Submit">
+                </form>
+      </div>
+      <% for(var i = 0; i < posts.paginatedResults.length; i++){ %>
+            <div class="post">
+                  <div class="content metadata">
+                        Posted by <%= posts.paginatedResults[i].author %> on <%= posts.paginatedResults[i].datePosted %>
+                  </div>
+                  <hr>
+                  <% if (posts.paginatedResults[i].title){ %>
+                        <div class="content">
+                              <h3><%= posts.paginatedResults[i].title %></h3>
+                        </div>
+                        <hr>
+                  <% }  %>
+                  <% if (posts.paginatedResults[i].link){ %>
+                        <div class="content">
+                              <%- posts.paginatedResults[i].link %>
+                        </div>
+                        <hr>
+                  <% }  %>
+                  <% if (posts.paginatedResults[i].content){ %>
+                        <div class="content desc">
+                              <% if (posts.paginatedResults[i].content.length > 100){ %>
+                                    <%- posts.paginatedResults[i].content.substring(0, 100) %>...
+                              <% } else { %>
+                                    <%- posts.paginatedResults[i].content -%>
+                             <% } %>
+                             <div class="content desc">
+                                    <a class="show-link" href="/posts/<%= posts.paginatedResults[i]._id %>">View post</a>
+                              </div>
+                        </div>
+                        <hr>
+                  <% }  %>
+                  <% if (posts.paginatedResults[i].tags){ %>
+                        <div class="content metadata">
+                              Style: <%- posts.paginatedResults[i].tags %>
+                        </div>
+                  <% }  %>
+            </div>
+            <% if(currentUser){ %>
+                  <div class="d-flex justify-content-center btn-container">
+                        <form action="/posts/<%= posts.paginatedResults[i]._id %>/edit" method="GET">
+                              <button class="btn btn-outline-warning form-btn mr-4">Edit</button>
+                        </form>
+                        <form action="/posts/<%= posts.paginatedResults[i]._id %>?_method=DELETE" method="POST">
+                              <button class="btn btn-outline-danger form-btn" onclick="return confirm('Are you sure you want to delete this post?');">Delete</button>
+                        </form>
+                  </div>
+            <% } %>
+      <% } %>
+      <div class="d-flex justify-content-center btn-container">
+            <% if(posts.previous){ %>
+                  <a href="/posts/?page=1&limit=5"><i class="fas fa-angle-double-left"></i></a>
+                  <a href="/posts/?page=<%= posts.previous.page %>&limit=5"><i class="fas fa-angle-left"></i></a>
+            <% } %>
+            
+            <% if(posts.next){ %>
+                  <a href="/posts/?page=<%= posts.next.page %>&limit=5"><i class="fas fa-angle-right"></i></a>
+                  <a href="/posts/?page=<%= posts.last.page %>&limit=5"><i class="fas fa-angle-double-right"></i></a>
+            <% } %>
+      </div>
+</div>
+
+
+
+<%- include("../partials/footer") %>

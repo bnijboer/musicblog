@@ -1,22 +1,25 @@
 <%- include("../partials/header") %>
 
-<div class="container">
+<div class="container col-sm-12 col-lg-7 mb-5">
+      <div class="section-title">
+            Edit post
+      </div>
       <div class="post">
             <form action="/posts/<%= post._id %>?_method=PUT" method="POST">
-                  <div class="content">
-                        <input class="form" type="text" name="title" value="<%= post.title %>">
+                  <div class="content pt-3 pb-4">
+                        <input class="form" type="text" name="title" value="<%= post.title %>" placeholder="Enter title">
                   </div>
-                  <hr>
-                  <div class="content">
-                        <input class="form" type="text" name="link" value="<%= post.link %>">
+                  <div class="content pb-4">
+                        <input class="form" type="text" name="artist" value="<%= post.artist %>" placeholder="Enter artist">
                   </div>
-                  <hr>
-                  <div class="content">
-                        <textarea class="form" type="text" name="content"><%= post.content %></textarea>
+                  <div class="content pb-4">
+                        <input class="form" type="text" name="link" value="<%= post.link %>" placeholder="Paste embedded link">
                   </div>
-                  <hr>
+                  <div class="content pb-3">
+                        <textarea class="form" type="text" name="content" placeholder="Type description"><%= post.content %></textarea>
+                  </div>
                   <div class="content">
-                        <input class="form" type="text" name="tags" value="<%= post.tags %>">
+                        <input class="form" type="text" name="tags" value="<%= post.tags %>" placeholder="Add style tags">
                   </div>
                   <div class="d-flex justify-content-between btn-container">
                         <button class="btn btn-outline-secondary form-btn" href="/posts/<%= post._id %>">Back</button>                      

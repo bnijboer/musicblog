@@ -9,11 +9,20 @@
       </head>
       <body>
             <nav class="navbar fixed-top justify-content-end">
-                  <a class="navbar-brand" href="/">Wanderlust</a>
+                  <a class="navbar-brand" href="/">
+                        <figure>
+                              <img id="logo" src="/images/logo.png">
+                           </figure>
+                        
+                        </a>
                   <a class="nav-link" href="/posts?page=1&limit=5">Posts</a>
                   <a class="nav-link" href="/about">About</a>
                   <% if(currentUser){ %>
                         <a class="nav-link" href="/posts/new">Create post</a>
                   <% } %>
+                  <!-- <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form> -->
             </nav>
             <div id="wrapper">

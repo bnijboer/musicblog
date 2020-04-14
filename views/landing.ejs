@@ -1,15 +1,46 @@
-<%- include("partials/header") %>
-
-            <div id="landing-container">
-                  <p>
-                        <h1>Wanderlust</h1>
-                  </p>
-                  <hr>
-                  <p>
-                        <h1>for enthusiasts of underground</h1>
-                        <h1>techno - ambient - dub - experimental</h1>
-                        <h1>and everything in between.</h1>
-                  </p>
-            </div>
-
-<%- include("partials/footer") %>
+<!DOCTYPE html>
+<html>
+      <head>
+            <title>Wanderlust</title>
+            <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Serif:ital@1&family=Rufina:wght@700&family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+            <link rel="stylesheet" type="text/css" href="/stylesheets/landing.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css">
+      </head>
+      <body>
+            <nav class="navbar fixed-top justify-content-end">
+                  <a class="navbar-brand" href="/">
+                        <figure>
+                              <img id="logo" src="/images/logo.png">
+                           </figure>
+                        
+                        </a>
+                  <a class="nav-link" href="/posts?page=1&limit=5">Posts</a>
+                  <a class="nav-link" href="/about">About</a>
+                  <% if(currentUser){ %>
+                        <a class="nav-link" href="/posts/new">Create post</a>
+                  <% } %>
+                  <!-- <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                  </form> -->
+            </nav>
+            <div id="wrapper">
+                  <div id="landing-container">
+                        <p>
+                              <h1>WANDERLUST</h1>
+                        </p>
+                        <p>
+                              <h2>For enthusiasts of sophisticated underground dance music.</h1>
+                        </p>
+                        
+                  </div>
+                  <% if (currentUser){ %>
+                        <a id="logout-btn" href="/logout" onclick="return confirm('Are you sure you want to logout?')"><i class="fas fa-sign-out-alt"></i></a>
+                  <% } %>
+            </div>    
+            <footer>
+                  © 2020 Brendan
+            </footer>
+      </body>
+</html>

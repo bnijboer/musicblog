@@ -1,45 +1,76 @@
 <%- include("../partials/header") %>
 
-<div class="container">
+
+<div class="container col-sm-12 col-lg-7 mb-5">
+      <div class="section-title">
+            Posts
+            <!-- <form action="/posts/filter" method="GET">
+                  <input type="checkbox" id="style1" name="tags" value="techno">
+                  <label for="style1">techno</label><br>
+                  <input type="checkbox" id="style2" name="tags" value="ambient">
+                  <label for="style2">ambient</label><br><br>
+                  <input type="submit" value="Submit">
+            </form> -->
+      </div>
       <% for(var i = 0; i < posts.paginatedResults.length; i++){ %>
             <div class="post">
-                  <div class="content">
-                        Posted by <%= posts.paginatedResults[i].author %> on <%= posts.paginatedResults[i].datePosted %>
+                  <div class="d-flex justify-content-between pt-4">
+                        <div class="metadata">
+                              <%= posts.paginatedResults[i].datePosted %> <span class="px-1">|</span> <i class="fas fa-user pr-1"></i> <%= posts.paginatedResults[i].author %>
+                        </div>
+                        <div>
+                              <% if(currentUser){ %>
+                                    <form class="d-inline" action="/posts/<%= posts.paginatedResults[i]._id %>/edit" method="GET">
+                                          <button class="admin-button"><i class="fas fa-edit mr-1"></i></button>
+                                    </form>
+                                    <form class="d-inline" action="/posts/<%= posts.paginatedResults[i]._id %>?_method=DELETE" method="POST">
+                                          <button class="admin-button" onclick="return confirm('Are you sure you want to delete this post?');"><i class="fas fa-trash"></i></button>
+                                    </form>
+                              <% } %>
+                        </div>
                   </div>
-                  <hr>
                   <% if (posts.paginatedResults[i].title){ %>
-                        <div class="content">
+                        <div class="pt-5">
                               <h3><%= posts.paginatedResults[i].title %></h3>
                         </div>
-                        <hr>
                   <% }  %>
+                  <% if (posts.paginatedResults[i].artist){ %>
+                        <div>
+                              <h4><%= posts.paginatedResults[i].artist %></h4>
+                        </div>
+                  <% } %>
+                  <% if (posts.paginatedResults[i].title || posts.paginatedResults[i].artist){ %>
+                        <hr class="section-end">
+                  <% } else { %>
+                        <div class="pb-5"></div>
+                  <% } %>
                   <% if (posts.paginatedResults[i].link){ %>
                         <div class="content">
                               <%- posts.paginatedResults[i].link %>
                         </div>
-                        <hr>
+                        
+                  <% }  %>
+                  <% if (posts.paginatedResults[i].tags){ %>
+                        <div class="content metadata pt-3 pb-4">
+                              Style: <%- posts.paginatedResults[i].tags %>
+                        </div>
                   <% }  %>
                   <% if (posts.paginatedResults[i].content){ %>
-                        <div class="content desc">
+                        <div class="content desc mb-4">
                               <% if (posts.paginatedResults[i].content.length > 100){ %>
                                     <%- posts.paginatedResults[i].content.substring(0, 100) %>...
                               <% } else { %>
                                     <%- posts.paginatedResults[i].content -%>
                              <% } %>
-                             <div class="content desc">
-                                    <a class="show-link" href="/posts/<%= posts.paginatedResults[i]._id %>">View post</a>
-                              </div>
                         </div>
-                        <hr>
-                  <% }  %>
-                  <% if (posts.paginatedResults[i].tags){ %>
-                        <div class="content tags">
-                              Style: <%- posts.paginatedResults[i].tags %>
+                        <div class="content desc mb-2">
+                              <a class="show-link" href="/posts/<%= posts.paginatedResults[i]._id %>"><button class="btn btn-outline-secondary">View post</button></a>
                         </div>
                   <% }  %>
             </div>
+            <hr class="post-end">
       <% } %>
-      <div class="d-flex justify-content-center btn-container pb-5">
+      <div class="d-flex justify-content-center btn-container">
             <% if(posts.previous){ %>
                   <a href="/posts/?page=1&limit=5"><i class="fas fa-angle-double-left"></i></a>
                   <a href="/posts/?page=<%= posts.previous.page %>&limit=5"><i class="fas fa-angle-left"></i></a>
@@ -51,6 +82,5 @@
             <% } %>
       </div>
 </div>
-
 
 <%- include("../partials/footer") %>
