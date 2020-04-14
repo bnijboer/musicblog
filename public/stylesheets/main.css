@@ -4,22 +4,6 @@
 /* ======= */
 
 
-@media (max-width: 1080px) {
-      .navbar {
-            background-color: whitesmoke;
-            box-shadow: 0.5px 0.5px 3px 1px lightgray;
-      }
-      .nav-link {
-            color: lightslategray !important;
-      }
-      .nav-link:hover, .navbar-brand {
-            color: darkslategray !important;
-      }
-      .navbar-brand:hover {
-            /* color: white !important;  */
-      }
-}
-
 html, body {
       height: 100vh;
       margin: 0;
@@ -32,6 +16,8 @@ body {
       font-family: 'Open Sans', sans-serif;
 }
 
+
+/* Brand logo */
 figure {
       width: 150px;
       overflow: hidden; 
@@ -44,6 +30,7 @@ figure img {
       margin: -36.875% 0;
 }
 
+/* Nav */
 .navbar {
       background-color: whitesmoke;
       box-shadow: 0.5px 0.5px 3px 1px lightgray;
@@ -69,29 +56,34 @@ figure img {
       border-bottom: 1px solid lightgrey;
       color: darkslategray;
 }
-    
+
+/* Main content */
 #wrapper {
       background: rgba(256,256,256,0.25);
-      
       min-height: 100%;
       overflow: auto;
-      /* margin-top: 4em; */
 }
 
+/* Content container */
+.container {
+      margin: 0 auto;
+      padding: 0;
+      border-radius: 2px;
+      background: rgba(256,256,256,0.85);
+      box-shadow: 0.5px 0.5px 3px 1px lightgray;
+}
+
+/* Page headers */
 .section-title {
-      /* margin-bottom: -100px; */
       font-family: 'Work Sans', sans-serif;
       text-shadow: 1.5px 1.5px 2px darkslategrey, 0.5px 0.5px 0.5px black;
       color: rgb(250, 250, 250);
       text-align: center;
       padding: 2em 0 60px 0;
       font-size: 54px;
-      background: url("../images/turntable.jpg");;
-      /* background-position: cover;
-      background-repeat: no-repeat; */
+      background: url("../images/turntable.jpg");
       width: 100%;
       box-shadow: 0.5px 0.5px 3px 1px lightgray;
-      /* box-shadow: 0 4px 2px -2px lightgray; */
 }
 
 .section-end {
@@ -100,14 +92,95 @@ figure img {
       padding-bottom: 20px;
 }
 
+/* Individual posts */
+.post {
+      padding: 20px 10%;
+}
+
 .post-end {
-      /* margin-top: 40px; */
       width: 100%;
       border: 0;
       height: 1px;
       background-image: linear-gradient(to right, rgba(160, 160, 160, 0), rgba(156, 156, 156, 0.75), rgba(168, 168, 168, 0));
 }
 
+/* Indivual rows in posts */
+.content {
+      padding: 0 20px;
+      text-align: center;
+}
+
+/* Post date, author, delete and edit buttons */
+.metadata, .fa-edit, .fa-trash {
+      color: rgb(172, 172, 172);
+}
+
+.metadata {
+      font-size: 13px;
+}
+
+.admin-button {
+      border: none;
+      background: inherit;
+}
+
+.fa-edit:hover {
+      color: rgb(231, 170, 3);
+}
+
+.fa-trash:hover {
+      color: rgb(221, 10, 10);
+}
+
+/* Title and artist headings */
+h3, h4 {
+      font-family: 'Work Sans', sans-serif;
+      text-shadow: 0.7px 0.7px 1px gray;
+}
+
+h3 {
+      color: rgb(64, 80, 37);
+      font-size: 28px;
+}
+
+h4 {
+      color: rgb(121, 148, 75);
+      font-size: 18px;
+}
+
+/* Embedded link width override */
+iframe {
+      width: 100%;
+}
+
+/* Post description */
+.desc {
+      color: rgba(15, 73, 26, 0.767);
+      padding: 25px 0 15px 0;
+      font-size: 18px;
+}
+
+/* Pre-formats text input */
+pre {
+      text-align: left;
+      white-space: pre-wrap;
+      font-family: 'Lato', sans-serif;
+}
+
+/* View post button */
+.show-link {
+      color: rgb(74, 92, 42);
+      text-shadow: 0.1px 0.1px 0.2px gray;
+      font-size: 15px;
+}
+
+.show-link:hover {
+      text-decoration: none;
+      text-shadow: 0.5px 0.5px 1px lightcoral;
+      color: rgb(74, 92, 42);
+}
+
+/* New and create post input forms */
 input, textarea {
       padding: 5px;
 }
@@ -120,27 +193,15 @@ textarea {
       width: 100%;
 }
 
-#logout-btn {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      color: lightgrey;
-      font-size: 20px;
-      text-shadow: 0.5px 0.5px 2px black, 0 0 1px gray;
+/* Back, Update and Login buttons */
+.btn-container {
+      margin-top: 30px;
+      width: 100%;
+      padding: 0 20px;
 }
 
-#logout-btn:hover {
-      font-size: 22px;
-      transition: ease-in 0.1s;
-}
-
-footer {
-      color: lightgrey;
-      text-align: end;
-      font-size: 15px;
-      padding: 0 10px 10px 0;
-      margin-top: -35px;
-      text-shadow: 0.5px 0.5px 2px black, 0 0 1px gray;
+.form-btn {
+      width: 90px;
 }
 
 .btn-outline-secondary {
@@ -173,152 +234,7 @@ footer {
       background-color: rgb(20, 72, 110);
 }
 
-
-
-/* ============ */
-/* LANDING PAGE */
-/* ============ */
-
-
-#landing-container {
-      margin: 200px auto 0;
-      text-align: center;
-      text-transform: uppercase;
-      background-color: rgba(256,256,256,0.35);
-      padding: 20px 0;
-}
-
-h1 {
-      font-family: 'Rufina', serif;
-      color: whitesmoke;
-      text-shadow: 1.2px 1.2px 1px lightslategray;
-}
-
-h1:nth-of-type(even) {
-      color: lightgray;
-      font-size: 27px;
-}
-
-h2 {
-      text-shadow: 1px 1px 1px lightslategray;
-      margin-top: 50px;
-      font-family: 'PT Serif', serif;
-      font-size: 20px;
-}
-
-#start {
-      text-decoration: none; 
-      color: whitesmoke;
-}
-
-#start:hover {
-      text-shadow: 1px 1px 1px rgb(61, 104, 61);
-}
-
-
-
-/* ============================= */
-/* INDEX, SHOW, NEW & EDIT PAGES */
-/* ============================= */
-
-
-h3, h4 {
-      font-family: 'Work Sans', sans-serif;
-      text-shadow: 0.7px 0.7px 1px gray;
-}
-
-h3 {
-      color: rgb(64, 80, 37);
-      font-size: 28px;
-      
-}
-
-h4 {
-      color: rgb(121, 148, 75);
-      font-size: 18px;
-      
-}
-
-.container {
-      /* min-width: 450px;
-      max-width: 55%; */
-      /* margin: 100px auto; */
-      margin: 0 auto;
-      padding: 0;
-      border-radius: 2px;
-      background: rgba(256,256,256,0.85);
-      box-shadow: 0.5px 0.5px 3px 1px lightgray;
-}
-
-.post {
-      padding: 20px 10%;
-      /* margin-top: 110px; */
-}
-
-.content {
-      padding: 0 20px;
-      text-align: center;
-}
-
-iframe {
-      width: 100%;
-}
-
-.desc {
-      color: rgba(15, 73, 26, 0.767);
-      padding: 25px 0 15px 0;
-      font-size: 18px;
-}
-
-pre {
-      text-align: left;
-      white-space: pre-wrap;
-      font-family: 'Lato', sans-serif;
-}
-
-.metadata, .fa-edit, .fa-trash {
-      color: rgb(172, 172, 172);
-}
-
-.metadata {
-      font-size: 13px;
-}
-
-.show-link {
-      color: rgb(74, 92, 42);
-      text-shadow: 0.1px 0.1px 0.2px gray;
-      font-size: 15px;
-}
-
-.show-link:hover {
-      text-decoration: none;
-      text-shadow: 0.5px 0.5px 1px lightcoral;
-      color: rgb(74, 92, 42);
-}
-
-.btn-container {
-      margin-top: 30px;
-      width: 100%;
-      padding: 0 20px;
-}
-
-.form-btn {
-      width: 90px;
-}
-
-.admin-button {
-      border: none;
-      background: inherit;
-}
-
-.fa-edit:hover {
-      color: rgb(231, 170, 3);
-}
-
-.fa-trash:hover {
-      color: rgb(221, 10, 10);
-}
-
+/* Pagination buttons */
 .fa-angle-left, .fa-angle-double-left, .fa-angle-right, .fa-angle-double-right {
       color: whitesmoke;
       font-size: 40px;
@@ -418,16 +334,31 @@ pre {
       }
 }
 
-
-
-/* ============= */
-/* ABOUT PAGE */
-/* ============= */
-
-
-#about {
-      /* padding: 20px 0; */
+/* Logout button */
+#logout-btn {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      color: lightgrey;
+      font-size: 20px;
+      text-shadow: 0.5px 0.5px 2px black, 0 0 1px gray;
 }
+
+#logout-btn:hover {
+      font-size: 22px;
+      transition: ease-in 0.1s;
+}
+
+/* Footer */
+footer {
+      color: lightgrey;
+      text-align: end;
+      font-size: 15px;
+      padding: 0 10px 10px 0;
+      margin-top: -35px;
+      text-shadow: 0.5px 0.5px 2px black, 0 0 1px gray;
+}
+
 
 /* ==================== */
 /* AUTHENTICATION PAGES */
