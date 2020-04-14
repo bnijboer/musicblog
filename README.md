@@ -18,7 +18,12 @@ Possible functionalities to add in the future:
 - Email subscription option
 
 Final product:
+
 ![Alt text](/screenshots/7.jpg?raw=true "preview")
+
 ![Alt text](/screenshots/8.jpg?raw=true "preview")
+
 ![Alt text](/screenshots/9.jpg?raw=true "preview")
+
 ![Alt text](/screenshots/10.jpg?raw=true "preview")
+
