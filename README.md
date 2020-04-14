@@ -17,7 +17,7 @@ Possible functionalities to add in the future:
 - Suggested posts
 - Email subscription option
 
-Final product:
+Final product screenshots:
 
 ![Alt text](/screenshots/7.jpg?raw=true "preview")
 
