@@ -30,29 +30,19 @@ figure img {
       margin: -36.875% 0;
 }
 
-.navbar {
-      background-color: whitesmoke;
-      box-shadow: 0.5px 0.5px 3px 1px lightgray;
-}
-
 .navbar-brand {
-      color: darkslategray;
       margin-right: auto
-}
-
-.navbar-brand:hover {
-      color: rgb(29, 29, 29);
 }
 
 .nav-link {
       padding: 0px 16px;
       border-bottom: 1px solid transparent;
-      color: lightslategray;
+      color: whitesmoke;
 }
 
 .nav-link:hover {
       border-bottom: 1px solid lightgrey;
-      color: darkslategray;
+      color: lightgrey;
 }
 
 #wrapper {
@@ -114,4 +104,19 @@ footer {
       padding: 0 10px 10px 0;
       margin-top: -35px;
       text-shadow: 0.5px 0.5px 2px black, 0 0 1px gray;
+}
+
+.btn-outline-secondary {
+      color:rgb(75, 79, 82);
+      border: 1px solid rgb(75, 79, 82);
+      background-color: whitesmoke;
+}
+
+.btn-outline-secondary:hover {
+      color: whitesmoke;
+      background-color: rgb(75, 79, 82);
+}
+
+.form-btn {
+      width: 90px;
 }
