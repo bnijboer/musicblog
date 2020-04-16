@@ -1,5 +1,10 @@
 const middlewareObj = {};
 
+middlewareObj.sanitizeInput = function(req, res, next){
+      req.body.username = req.sanitize(req.body.username);
+      next();
+}
+
 middlewareObj.isLoggedIn = function(req, res, next){
       if(req.isAuthenticated()){
             return next();

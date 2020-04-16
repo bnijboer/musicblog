@@ -6,6 +6,7 @@
 // DEPENDENCIES
 
 const express                 = require("express"),
+      expressSanitizer        = require ("express-sanitizer"),
       mongoose                = require("mongoose"),
       passport                = require("passport"),
       bodyParser              = require("body-parser"),
@@ -29,6 +30,7 @@ mongoose.connect("mongodb://localhost:27017/musicblog", {useNewUrlParser: true, 
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(expressSanitizer());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 
