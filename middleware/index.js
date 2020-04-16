@@ -2,7 +2,7 @@ const middlewareObj = {};
 
 middlewareObj.sanitizeInput = function(req, res, next){
       req.body.username = req.sanitize(req.body.username);
-      next();
+      return next();
 }
 
 middlewareObj.isLoggedIn = function(req, res, next){
