@@ -5,8 +5,11 @@
 
 // DEPENDENCIES
 
+
+
 const express                 = require("express"),
       expressSanitizer        = require ("express-sanitizer"),
+      dotEnv                  = require('dotenv').config(),
       mongoose                = require("mongoose"),
       passport                = require("passport"),
       bodyParser              = require("body-parser"),
@@ -23,7 +26,15 @@ const postRoutes  = require("./routes/posts"),
 
 // DB CONNECT
 
-mongoose.connect("mongodb://localhost:27017/musicblog", {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect(process.env.DATABASEURL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false
+}).then(() => {
+      console.log("Connected to MongoDB.");
+}).catch(err => {
+      console.log("Error:", err.message);
+});;
 
 
 // APP CONFIG
